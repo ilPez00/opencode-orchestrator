@@ -5,7 +5,7 @@
  */
 
 import type { Config } from "@opencode-ai/plugin";
-import { AGENTS } from "../agents/definitions.js";
+import { AGENTS, physisAgent } from "../agents/definitions.js";
 import { COMMANDS } from "../tools/slashCommand.js";
 import { AGENT_NAMES } from "../shared/index.js";
 
@@ -76,6 +76,7 @@ export function createConfigHandler() {
         const plannerPrompt = AGENTS[AGENT_NAMES.PLANNER]?.systemPrompt || "";
         const workerPrompt = AGENTS[AGENT_NAMES.WORKER]?.systemPrompt || "";
         const reviewerPrompt = AGENTS[AGENT_NAMES.REVIEWER]?.systemPrompt || "";
+        const physisPrompt = AGENTS[AGENT_NAMES.PHYSIS_AGENT]?.systemPrompt || physisAgent.systemPrompt || "";
 
         const existingCommands = mutableConfig.command ?? {};
         const existingAgents = mutableConfig.agent ?? {};
@@ -91,7 +92,7 @@ export function createConfigHandler() {
             };
         }
 
-        // Register Commander (primary) and consolidated subagents (4 agents)
+        // Register Commander (primary) and consolidated subagents (5 agents)
         const orchestratorAgents: Record<string, AgentConfig> = {
             // Primary agent - the main orchestrator
             [AGENT_NAMES.COMMANDER]: defineAgent(existingAgents[AGENT_NAMES.COMMANDER], {
@@ -121,6 +122,13 @@ export function createConfigHandler() {
                 hidden: true,
                 prompt: reviewerPrompt,
                 color: "#27AE60",
+            }, globalPermission),
+            [AGENT_NAMES.PHYSIS_AGENT]: defineAgent(existingAgents[AGENT_NAMES.PHYSIS_AGENT], {
+                description: "Neurosemantic analysis layer — 70-cell semiotic grid",
+                mode: "subagent",
+                hidden: true,
+                prompt: physisPrompt,
+                color: "#8E44AD",
             }, globalPermission),
         };
 

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "physis": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "cd ${PHYSIS_CORE_PATH:-/home/gio/dev/physis-pro} && PHYSIS_SCAN_ROOT=. PHYSIS_DATA_DIR=.physis cargo run --features mcp --bin physis-pro -- serve --stdio"
+      ],
+      "env": {
+        "PHYSIS_SCAN_ROOT": ".",
+        "PHYSIS_DATA_DIR": ".physis",
+        "PHYSIS_CORE_PATH": "/home/gio/dev/physis-pro"
+      }
+    }
+  }
+}

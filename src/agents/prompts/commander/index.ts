@@ -5,6 +5,7 @@ export * from "./execution-strategy.js";
 export * from "./parallel.js";
 export * from "./hyper-parallel.js";
 export * from "./delegation.js";
+export * from "./cavecrew-routing.js";
 export * from "./todo-format.js";
 export * from "./loop-continuation.js";
 export * from "./sync-handling.js";

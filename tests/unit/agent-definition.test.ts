@@ -19,15 +19,16 @@ describe("Agent Definitions", () => {
     // ========================================================================
 
     describe("AGENTS registry", () => {
-        it("should export all four agents", () => {
+        it("should export all five agents", () => {
             expect(AGENTS[AGENT_NAMES.COMMANDER]).toBeDefined();
             expect(AGENTS[AGENT_NAMES.PLANNER]).toBeDefined();
             expect(AGENTS[AGENT_NAMES.WORKER]).toBeDefined();
             expect(AGENTS[AGENT_NAMES.REVIEWER]).toBeDefined();
+            expect(AGENTS[AGENT_NAMES.PHYSIS_AGENT]).toBeDefined();
         });
 
-        it("should have exactly 4 agents", () => {
-            expect(Object.keys(AGENTS)).toHaveLength(4);
+        it("should have exactly 5 agents", () => {
+            expect(Object.keys(AGENTS)).toHaveLength(5);
         });
     });
 
@@ -166,6 +167,27 @@ describe("Agent Definitions", () => {
     });
 
     // ========================================================================
+    // PhysisAgent
+    // ========================================================================
+
+    describe("PhysisAgent", () => {
+        const physis = AGENTS[AGENT_NAMES.PHYSIS_AGENT];
+
+        it("should have neurosemantic analysis role", () => {
+            expect(physis.id).toBe(AGENT_NAMES.PHYSIS_AGENT);
+        });
+
+        it("should be read-only (no write/bash)", () => {
+            expect(physis.canWrite).toBe(false);
+            expect(physis.canBash).toBe(false);
+        });
+
+        it("should include MCP tool references", () => {
+            expect(physis.systemPrompt).toContain("physis");
+        });
+    });
+
+    // ========================================================================
     // System Prompt Quality
     // ========================================================================
 
@@ -214,6 +236,7 @@ describe("Agent Definitions", () => {
                 AGENTS[AGENT_NAMES.PLANNER],
                 AGENTS[AGENT_NAMES.WORKER],
                 AGENTS[AGENT_NAMES.REVIEWER],
+                AGENTS[AGENT_NAMES.PHYSIS_AGENT],
             ];
 
             for (const subagent of subagents) {

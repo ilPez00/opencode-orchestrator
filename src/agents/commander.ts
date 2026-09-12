@@ -28,8 +28,9 @@ import {
    COMMANDER_EXECUTION,
    COMMANDER_PARALLEL,
    HYPER_PARALLEL_ENFORCEMENT,
-   DELEGATION_RULES,
-   COMMANDER_TODO_FORMAT,
+    DELEGATION_RULES,
+    CAVECREW_ROUTING,
+    COMMANDER_TODO_FORMAT,
    // Loop & sync handling
    COMMANDER_LOOP_CONTINUATION,
    COMMANDER_SYNC_HANDLING,
@@ -56,8 +57,9 @@ const systemPrompt = composePrompt([
    // HPFA is Commander-only: it mandates parallel spawning, which terminal
    // agents are forbidden to do.
    { body: HYPER_PARALLEL_ENFORCEMENT, verbose: true },
-   DELEGATION_RULES,
-   TODO_RULES,
+    DELEGATION_RULES,
+    CAVECREW_ROUTING,
+    TODO_RULES,
    COMMANDER_TODO_FORMAT,
    // Loop, shared state, sync handling
    COMMANDER_LOOP_CONTINUATION,

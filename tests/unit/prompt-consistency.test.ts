@@ -37,6 +37,7 @@ const TERMINAL_AGENTS = [
     AGENT_NAMES.PLANNER,
     AGENT_NAMES.WORKER,
     AGENT_NAMES.REVIEWER,
+    AGENT_NAMES.PHYSIS_AGENT,
 ] as const;
 
 const ALL_AGENTS = [AGENT_NAMES.COMMANDER, ...TERMINAL_AGENTS] as const;
@@ -76,7 +77,7 @@ describe("Prompt Consistency Guards", () => {
     });
 
     it("teaches exactly one TODO hierarchy schema (M/T/S) to every agent", () => {
-        // todo.md is the shared contract between all four agents. The audit
+        // todo.md is the shared contract between all five agents. The audit
         // found three competing schemas (M1/T1.1/S1.1.1, G1/P1.1/T1.1.1,
         // T1/S1.1) taught to the same agents. Only the M/T/S scheme may
         // appear in composed prompts.

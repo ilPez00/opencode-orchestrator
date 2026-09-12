@@ -16,6 +16,7 @@ describe("agent system prompts (drift guard)", () => {
         AGENT_NAMES.PLANNER,
         AGENT_NAMES.WORKER,
         AGENT_NAMES.REVIEWER,
+        AGENT_NAMES.PHYSIS_AGENT,
     ];
 
     for (const name of names) {

@@ -12,18 +12,22 @@ import { AGENT_NAMES, PATHS, PROMPT_TAGS, TOOL_NAMES, wrapTag } from "../../../s
 export const ROLE_MATRIX = wrapTag(PROMPT_TAGS.ROLE_MATRIX, `
 ## Role Permission Matrix (Authoritative)
 
-| Capability | ${AGENT_NAMES.COMMANDER} | ${AGENT_NAMES.PLANNER} | ${AGENT_NAMES.WORKER} | ${AGENT_NAMES.REVIEWER} |
-|------------|:---:|:---:|:---:|:---:|
-| Spawn agents (\`${TOOL_NAMES.DELEGATE_TASK}\`) | YES | no | no | no |
-| Write/modify source code | no | no | YES | no |
-| Create/restructure ${PATHS.TODO} | no | YES | no | no |
-| Mark \`[x]\` in ${PATHS.TODO} | no | no | no | YES |
-| Update ${PATHS.WORK_LOG} | read | YES | YES | YES |
-| Run build/test commands | no | no | YES | YES |
-| Research + cache docs to ${PATHS.DOCS}/ | no | YES | YES | no |
+| Capability | ${AGENT_NAMES.COMMANDER} | ${AGENT_NAMES.PLANNER} | ${AGENT_NAMES.WORKER} | ${AGENT_NAMES.REVIEWER} | ${AGENT_NAMES.PHYSIS_AGENT} |
+|------------|:---:|:---:|:---:|:---:|:---:|
+| Spawn agents (\`${TOOL_NAMES.DELEGATE_TASK}\`) | YES | no | no | no | no |
+| Write/modify source code | no | no | YES | no | no |
+| Create/restructure ${PATHS.TODO} | no | YES | no | no | no |
+| Mark \`[x]\` in ${PATHS.TODO} | no | no | no | YES | no |
+| Update ${PATHS.WORK_LOG} | read | YES | YES | YES | no |
+| Run build/test commands | no | no | YES | YES | no |
+| Research + cache docs to ${PATHS.DOCS}/ | no | YES | YES | no | no |
+| Use physis MCP tools | no | no | no | no | YES |
 
 Rules of interpretation:
-- ${AGENT_NAMES.PLANNER}, ${AGENT_NAMES.WORKER}, and ${AGENT_NAMES.REVIEWER} are TERMINAL agents: they never spawn or delegate; they finish their assigned scope and report back to ${AGENT_NAMES.COMMANDER}.
+- ${AGENT_NAMES.PLANNER}, ${AGENT_NAMES.WORKER}, ${AGENT_NAMES.REVIEWER}, and ${AGENT_NAMES.PHYSIS_AGENT} are TERMINAL agents: they never spawn or delegate; they finish their assigned scope and report back to ${AGENT_NAMES.COMMANDER}.
 - Completion flows one way: ${AGENT_NAMES.WORKER} reports evidence → ${AGENT_NAMES.COMMANDER} delegates verification → ${AGENT_NAMES.REVIEWER} marks \`[x]\`.
 - If any other instruction in this prompt appears to conflict with this matrix, THIS MATRIX WINS.
+- cavecrew-investigator, cavecrew-builder, cavecrew-reviewer are TERMINAL fast-path agents: they never spawn or delegate.
+- cavecrew-investigator is read-only; cavecrew-builder edits max 2 files, no new abstractions; cavecrew-reviewer reports findings only.
+- ONLY ${AGENT_NAMES.REVIEWER} marks \`[x]\` in TODO; cavecrew-reviewer never marks TODO.
 `);

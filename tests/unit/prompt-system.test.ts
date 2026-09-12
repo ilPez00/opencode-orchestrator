@@ -153,11 +153,12 @@ describe("Prompt System", () => {
     // ========================================================================
 
     describe("agent names", () => {
-        it("should define all four agents", () => {
+        it("should define all five agents", () => {
             expect(AGENT_NAMES.COMMANDER).toBeDefined();
             expect(AGENT_NAMES.PLANNER).toBeDefined();
             expect(AGENT_NAMES.WORKER).toBeDefined();
             expect(AGENT_NAMES.REVIEWER).toBeDefined();
+            expect(AGENT_NAMES.PHYSIS_AGENT).toBeDefined();
         });
 
         it("should have unique agent names", () => {
@@ -166,6 +167,7 @@ describe("Prompt System", () => {
                 AGENT_NAMES.PLANNER,
                 AGENT_NAMES.WORKER,
                 AGENT_NAMES.REVIEWER,
+                AGENT_NAMES.PHYSIS_AGENT,
             ];
             const uniqueNames = new Set(names);
             expect(uniqueNames.size).toBe(names.length);

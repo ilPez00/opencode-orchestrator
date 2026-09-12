@@ -11,4 +11,5 @@ export const AGENT_NAMES = {
     PLANNER: "Planner",
     WORKER: "Worker",
     REVIEWER: "Reviewer", // Unit Review & Final Quality Gate (Conceptual Master)
+    PHYSIS_AGENT: "PhysisAgent",
 } as const;
