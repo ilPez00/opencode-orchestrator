@@ -1,3 +1,5 @@
+> **Fork attribution.** This is a fork of [agnusdei1207/opencode-orchestrator](https://github.com/agnusdei1207/opencode-orchestrator). At audit time this fork was 1 commits ahead of upstream. Original changes: see this fork's commit history. Upstream README follows.
+
 <div align="center">
   <img src="assets/logo.png" alt="OpenCode Orchestrator logo" width="160" />
   <h1>OpenCode Orchestrator</h1>
